@@ -73,7 +73,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: /docker
+          context: docker
           push: true
           tags: noloknolo/knolohub:latest
       
