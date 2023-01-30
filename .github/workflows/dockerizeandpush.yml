@@ -1,4 +1,4 @@
-name: CI
+name: Build 
 
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
@@ -9,18 +9,22 @@ on:
   workflow_dispatch:
 
 jobs:
-  # This workflow contains a single job called "build"
+
   build:
     runs-on: ubuntu-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Download code 
       - uses: actions/checkout@v3
         with: 
           repository: manupalhu/knolohub.git
           ref: dev
           token: ${{ secrets.GH_TOKEN }}
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: ls 
+      # Build Jar
+      - name: Build Jar
+        run: ./gradlew -Pprod clean bootJar
+      
+      - name: Check jarfile exits
+        run: ls build/libs/
+
 
