@@ -30,7 +30,7 @@ jobs:
       - name: Publish artifact 
         uses: actions/upload-artifact@v2
         with:
-          name: build/libs
+          name: build
           path: build/libs
   
   Dockerize:
