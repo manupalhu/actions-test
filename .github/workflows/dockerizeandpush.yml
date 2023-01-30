@@ -35,6 +35,7 @@ jobs:
   
   Dockerize:
     runs-on: ubuntu-20.04
+    needs: [build]
 
     steps:
       - name: Set up QEMU
