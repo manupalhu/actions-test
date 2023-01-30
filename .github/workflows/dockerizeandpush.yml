@@ -1,12 +1,14 @@
 name: Build 
 
 on:
-  # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+
   workflow_dispatch:
+
+  repository_dispatch:
+    repository: manupalhu/knolohub.git
+    branches: ["master"]
 
 jobs:
 
