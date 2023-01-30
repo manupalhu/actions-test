@@ -16,7 +16,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
         with: 
-          repository: https://github.com/manupalhu/knolohub.git
+          repository: manupalhu/knolohub.git
           ref: dev
           token: ${{ secrets.GH_TOKEN }}
 
