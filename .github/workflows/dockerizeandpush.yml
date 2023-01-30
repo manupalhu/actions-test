@@ -30,8 +30,8 @@ jobs:
       - name: Publish artifact 
         uses: actions/upload-artifact@v2
         with:
-          name: build/libs/
-          path: /
+          name: build/libs
+          path: build/libs
   
   Dockerize:
     runs-on: ubuntu-20.04
