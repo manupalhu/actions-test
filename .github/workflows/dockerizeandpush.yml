@@ -11,20 +11,48 @@ on:
 jobs:
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
-      # Download code 
-      - uses: actions/checkout@v3
+      - name: Download code
+        uses: actions/checkout@v3
         with: 
           repository: manupalhu/knolohub.git
           ref: dev
           token: ${{ secrets.GH_TOKEN }}
+          fetch-depth: 0
 
-      # Build Jar
       - name: Build Jar
         run: ./gradlew -Pprod clean bootJar
       
       - name: Check jarfile exits
         run: ls build/libs/
 
+      - name: Publish artifact 
+        uses: actions/upload-artifact@v2
+        with:
+          name: build/libs/
+          path: /
+  
+  Dockerize:
+    runs-on: ubuntu-20.04
 
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: noloknolo
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: /docker/
+          push: true
+          tags: noloknolo/${{ variables.IMAGE_NAME }}:latest
+      
