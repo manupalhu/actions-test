@@ -10,6 +10,14 @@ on:
 
 jobs:
 
+  avoid_reduncy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Cancel Previous Redundant Builds
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
   build:
     runs-on: ubuntu-20.04
     steps:
@@ -55,5 +63,5 @@ jobs:
         with:
           context: /docker/
           push: true
-          tags: noloknolo/${{ secrets.IMAGE_NAME }}:latest
+          tags: noloknolo/$IMAGE_NAME:latest
       
