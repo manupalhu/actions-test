@@ -46,8 +46,14 @@ jobs:
     needs: [build]
 
     steps:
-    
+
       - uses: actions/checkout@v3
+
+      - name: Download artifacs
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: build/libs
 
       - name: Check
         run: ls
@@ -67,7 +73,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: /docker/
+          context: /docker
           push: true
           tags: noloknolo/knolohub:latest
       
