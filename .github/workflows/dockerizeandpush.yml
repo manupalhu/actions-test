@@ -46,6 +46,9 @@ jobs:
     needs: [build]
 
     steps:
+    
+      - uses: actions/checkout@v3
+
       - name: Check
         run: ls
 
